@@ -14,7 +14,6 @@ import Riding from "./pages/Riding";
 import Capitanride from "./pages/Capitanride";
 import ProtectedRoute from "./pages/Protectedroute";
 //comment
-
 function App() {
   const [count, setCount] = useState(0);
   return (
@@ -41,7 +40,7 @@ function App() {
         element={
           <Capitanprotected>
             <Capitanhome />
-          </Capitanprotected>
+            </Capitanprotected>
         }
       />
     </Routes>
