@@ -1,28 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Cookies from "js-cookie"; // install with: npm i js-cookie
+import { Usercontext } from "../contexts/usercontext";
 
 function ProtectedRoute({ children }) {
-  const [isAuth, setIsAuth] = useState(null);
+  const { user } = useContext(Usercontext);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = Cookies.get("token"); // 👈 read token from cookies
-
-    if (token) {
-      setIsAuth(true);
-    } else {
-      setIsAuth(false);
+    if (!user || !user.email) {
       navigate("/userlogin");
     }
-  }, [navigate]);
+  }, [user, navigate]);
 
-  if (isAuth === null) {
+  if (!user || !user.email) {
     return <p>Loading...</p>;
   }
 
   return <>{children}</>;
 }
-
 export default ProtectedRoute;
+
 
